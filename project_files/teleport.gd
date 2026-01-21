@@ -36,14 +36,18 @@ func _process(_delta: float) -> void:
 		if ray.is_colliding():
 			marker.visible = true
 			var point = ray.get_collision_point()
+			var normal = ray.get_collision_normal()
 			
-			# Ustawiamy znacznik w punkcie trafienia
-			marker.global_transform.origin = point
+			marker.global_position = point
 			
-			# --- NOWA LINIA: RESET ROTACJI ---
-			# Wymuszamy obrót (0,0,0) względem świata. 
-			# Dzięki temu znacznik zawsze leży płasko, niezależnie od tego jak machasz ręką.
-			marker.global_rotation = Vector3.ZERO 
+			# Algorytm: "Patrz wzdłuż normalnej, ale zachowaj pion"
+			# To trochę trudniejsza matematyka, ale dla prostego kółka wystarczy:
+			if normal.is_equal_approx(Vector3.UP):
+				marker.global_rotation = Vector3.ZERO
+			else:
+				# Opcjonalnie: dopasowanie do skosu (może powodować dziwne obroty na krawędziach)
+				# Dla Twojego projektu Vector3.ZERO jest bezpieczniejszy.
+				marker.global_rotation = Vector3.ZERO
 			
 		else:
 			marker.visible = false
