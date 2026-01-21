@@ -28,8 +28,9 @@ func _ready() -> void:
     # be called sometime later to let us know if it's supported or not.
     webxr_interface.is_session_supported("immersive-vr")
 
-  $XROrigin3D/LeftController.button_pressed.connect(self._on_left_controller_button_pressed)
-  $XROrigin3D/LeftController.button_released.connect(self._on_left_controller_button_released)
+# NOWE (POPRAWNE):
+    $Player/XROrigin3D/LeftController.button_pressed.connect(self._on_left_controller_button_pressed)
+    $Player/XROrigin3D/LeftController.button_released.connect(self._on_left_controller_button_released)
 
 func _webxr_session_supported(session_mode: String, supported: bool) -> void:
   if session_mode == 'immersive-vr':
@@ -87,7 +88,7 @@ func _on_left_controller_button_released(button: String) -> void:
   print ("Button release: " + button)
 
 func _process(_delta: float) -> void:
-  var thumbstick_vector: Vector2 = $XROrigin3D/LeftController.get_vector2("thumbstick")
+  var thumbstick_vector: Vector2 = $Player/XROrigin3D/LeftController.get_vector2("thumbstick")
   if thumbstick_vector != Vector2.ZERO:
     print ("Left thumbstick position: " + str(thumbstick_vector))
 
