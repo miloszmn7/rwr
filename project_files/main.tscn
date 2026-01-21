@@ -51,6 +51,7 @@ script = ExtResource("3_h2yge")
 transform = Transform3D(-4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 3.821371e-15, -8.742278e-08, 1, 0, 0, 0)
 
 [node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.2)
 target_position = Vector3(0, 0, -10)
 
 [node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
