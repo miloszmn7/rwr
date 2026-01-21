@@ -56,20 +56,20 @@ func _physics_process(delta: float) -> void:
 # Ta funkcja przesuwa Ciało (CharacterBody) w miejsce gdzie stoi głowa,
 # a potem przesuwa Origin w przeciwną stronę, żebyś wizualnie tego nie poczuł.
 func _recenter_character() -> void:
-	# Pobieramy lokalną pozycję kamery względem środka gracza
-	var camera_offset = xr_camera.position
+	# 1. Obliczamy pozycje w świecie (Global), ignorując wysokość (Y)
+	var head_global_pos = xr_camera.global_position
+	var body_global_pos = global_position
 	
-	# Ignorujemy wysokość (Y), interesuje nas tylko przód/tył/lewo/prawo
-	camera_offset.y = 0.0
+	# Spłaszczamy do 2D (podłoga)
+	var diff = head_global_pos - body_global_pos
+	diff.y = 0.0
 	
-	# Jeśli przesunięcie jest bardzo małe, nie robimy nic (oszczędność mocy)
-	if camera_offset.length() < 0.001:
+	# 2. Jeśli przesunięcie jest minimalne, nic nie rób (zapobiega drganiu)
+	if diff.length() < 0.05: # Tolerancja 5 cm
 		return
 		
-	# 1. Przesuwamy całego Gracza (z kapsułą) tam gdzie jest kamera
-	# Dzięki temu kapsuła zawsze otacza Twoją głowę!
-	global_position += xr_origin.global_transform.basis * camera_offset
+	# 3. Przesuwamy Ciało (Kapsułę) pod Głowę
+	global_position += diff
 	
-	# 2. Przesuwamy Origin w przeciwną stronę
-	# Żeby świat Ci nie "przeskoczył" przed oczami
-	xr_origin.position -= camera_offset
+	# 4. Przesuwamy Origin w przeciwną stronę, żeby kamera optycznie została w miejscu
+	xr_origin.global_position -= diff
