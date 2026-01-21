@@ -1,7 +1,13 @@
-[gd_scene load_steps=10 format=3 uid="uid://cfsxb31ad203x"]
+[gd_scene load_steps=12 format=3 uid="uid://cfsxb31ad203x"]
 
 [ext_resource type="Script" uid="uid://b0hk8jar30uyh" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://v0vdkyos0rfu" path="res://assets/models/hand_left.tscn" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://c68csvyk47nus" path="res://teleport.gd" id="3_h2yge"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_1bvp3"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.01
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ig7tw"]
 size = Vector2(20, 20)
@@ -39,9 +45,16 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
+script = ExtResource("3_h2yge")
 
 [node name="HandRight" parent="XROrigin3D/RightController" instance=ExtResource("1_ig7tw")]
 transform = Transform3D(-4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 3.821371e-15, -8.742278e-08, 1, 0, 0, 0)
+
+[node name="TeleportRay" type="RayCast3D" parent="XROrigin3D/RightController"]
+target_position = Vector3(0, 0, -10)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="XROrigin3D/RightController"]
+mesh = SubResource("CylinderMesh_1bvp3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
