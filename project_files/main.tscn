@@ -58,7 +58,6 @@ height = 1.8
 transparency = 3
 alpha_hash_scale = 0.51
 alpha_antialiasing_mode = 0
-cull_mode = 2
 albedo_color = Color(1, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7mycd"]
