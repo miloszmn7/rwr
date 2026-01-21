@@ -1,10 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://cfsxb31ad203x"]
+[gd_scene load_steps=13 format=3 uid="uid://cfsxb31ad203x"]
 
 [ext_resource type="Script" uid="uid://b0hk8jar30uyh" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://v0vdkyos0rfu" path="res://assets/models/hand_left.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c68csvyk47nus" path="res://teleport.gd" id="3_h2yge"]
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
+transparency = 1
+
 [sub_resource type="CylinderMesh" id="CylinderMesh_1bvp3"]
+material = SubResource("StandardMaterial3D_h2yge")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.01
