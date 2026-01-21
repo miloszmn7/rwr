@@ -21,51 +21,36 @@ func _ready() -> void:
 	ray.enabled = false 
 
 func _process(_delta: float) -> void:
-	# Pobieramy wychylenie gałki
 	var input_vector = get_vector2("thumbstick")
 	
-	# --- 1. STAN CELOWANIA (Gdy wychylasz gałkę) ---
+	# --- 1. CELOWANIE ---
 	if input_vector.length() > DEADZONE:
 		if not is_aiming:
-			print("Start celowania")
 			is_aiming = true
-			ray.enabled = true # Włączamy fizykę lasera
+			ray.enabled = true 
 		
-		# Aktualizacja pozycji znacznika
-		# Aktualizacja pozycji znacznika
 		if ray.is_colliding():
 			marker.visible = true
-			var point = ray.get_collision_point()
-			var normal = ray.get_collision_normal()
 			
-			marker.global_position = point
+			# Ustawiamy pozycję w punkcie trafienia
+			marker.global_position = ray.get_collision_point()
 			
-			# Algorytm: "Patrz wzdłuż normalnej, ale zachowaj pion"
-			# To trochę trudniejsza matematyka, ale dla prostego kółka wystarczy:
-			if normal.is_equal_approx(Vector3.UP):
-				marker.global_rotation = Vector3.ZERO
-			else:
-				# Opcjonalnie: dopasowanie do skosu (może powodować dziwne obroty na krawędziach)
-				# Dla Twojego projektu Vector3.ZERO jest bezpieczniejszy.
-				marker.global_rotation = Vector3.ZERO
+			# ### TO NAPRAWIA POCHYLANIE ###
+			# Wymuszamy, by rotacja względem ŚWIATA (global) była wyzerowana.
+			# Niezależnie jak krzywo trzymasz kontroler, to nadpisze jego wpływ.
+			marker.global_rotation = Vector3.ZERO
 			
 		else:
 			marker.visible = false
 			
-	# --- 2. MOMENT PUSZCZENIA GAŁKI (Próba teleportacji) ---
+	# --- 2. SKOK (bez zmian) ---
 	elif is_aiming:
-		print("Puszczono gałkę - sprawdzam czy można skoczyć...")
 		is_aiming = false
 		marker.visible = false
 		
-		# NAJWAŻNIEJSZA ZMIANA: Sprawdzamy kolizję ZANIM wyłączymy laser
 		if ray.is_colliding():
-			print("Cel widoczny -> SKOK!")
 			teleport_now()
-		else:
-			print("Brak celu -> Anulowanie skoku.")
 		
-		# Dopiero teraz wyłączamy laser
 		ray.enabled = false
 
 func teleport_now() -> void:

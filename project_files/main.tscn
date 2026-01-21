@@ -1,11 +1,10 @@
-[gd_scene load_steps=13 format=3 uid="uid://cfsxb31ad203x"]
+[gd_scene load_steps=14 format=3 uid="uid://cfsxb31ad203x"]
 
 [ext_resource type="Script" uid="uid://b0hk8jar30uyh" path="res://main.gd" id="1_0xm2m"]
 [ext_resource type="PackedScene" uid="uid://v0vdkyos0rfu" path="res://assets/models/hand_left.tscn" id="1_ig7tw"]
 [ext_resource type="Script" uid="uid://c68csvyk47nus" path="res://teleport.gd" id="3_h2yge"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_h2yge"]
-transparency = 1
 albedo_color = Color(0.7459297, 0.39375988, 0.71188295, 1)
 
 [sub_resource type="CylinderMesh" id="CylinderMesh_1bvp3"]
@@ -13,6 +12,12 @@ material = SubResource("StandardMaterial3D_h2yge")
 top_radius = 0.1
 bottom_radius = 0.1
 height = 0.01
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1bvp3"]
+albedo_color = Color(0.89250195, 0.9429888, 7.70092e-07, 1)
+emission_enabled = true
+emission = Color(0.89411765, 0.9411765, 0, 1)
+emission_energy_multiplier = 2.0
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_ig7tw"]
 size = Vector2(20, 20)
@@ -61,6 +66,7 @@ target_position = Vector3(0, 0, -10)
 
 [node name="TeleportMarker" type="MeshInstance3D" parent="XROrigin3D/RightController"]
 mesh = SubResource("CylinderMesh_1bvp3")
+surface_material_override/0 = SubResource("StandardMaterial3D_1bvp3")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
