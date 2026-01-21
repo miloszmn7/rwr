@@ -74,6 +74,7 @@ text = "Enter VR"
 mesh = SubResource("PlaneMesh_ig7tw")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Floor"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Floor/StaticBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.05, 0)
@@ -85,6 +86,7 @@ layers = 2
 mesh = SubResource("CylinderMesh_h2yge")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Obstacle1"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Obstacle1/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_1bvp3")
@@ -95,6 +97,7 @@ layers = 2
 mesh = SubResource("CylinderMesh_h2yge")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Obstacle2"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Obstacle2/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_1bvp3")
@@ -105,6 +108,7 @@ layers = 2
 mesh = SubResource("BoxMesh_1bvp3")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="Level/Obstacle3"]
+collision_layer = 2
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Level/Obstacle3/StaticBody3D"]
 shape = SubResource("BoxShape3D_lquwl")
