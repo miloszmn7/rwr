@@ -42,6 +42,7 @@ emission = Color(0.89411765, 0.9411765, 0, 1)
 emission_energy_multiplier = 2.0
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1bvp3"]
+height = 1.8
 
 [node name="Node3D" type="Node3D"]
 script = ExtResource("1_0xm2m")

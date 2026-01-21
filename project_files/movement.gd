@@ -48,4 +48,12 @@ func _physics_process(_delta: float) -> void:
 		velocity.z = 0
 
 	# 7. Wykonujemy ruch (TO TA FUNKCJA BLOKUJE PRZECHODZENIE PRZEZ ŚCIANY)
-	move_and_slide()
+	#move_and_slide()
+	# ... (reszta kodu bez zmian) ...
+	
+	# 7. Wykonujemy ruch
+	var collision_happened = move_and_slide()
+	
+	# DEBUG KOLIZJI
+	if collision_happened:
+		print("KOLIZJA! Uderzyłem w ścianę!")
