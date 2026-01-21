@@ -35,12 +35,13 @@ script = ExtResource("1_0xm2m")
 tracker = &"left_hand"
 
 [node name="HandLeft" parent="XROrigin3D/LeftController" instance=ExtResource("1_ig7tw")]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="RightController" type="XRController3D" parent="XROrigin3D"]
 tracker = &"right_hand"
 
 [node name="HandRight" parent="XROrigin3D/RightController" instance=ExtResource("1_ig7tw")]
-transform = Transform3D(-1, 0, 0, 0, -1, 0, 0, 0, -1, 0, 0, 0)
+transform = Transform3D(-4.371139e-08, 1, 8.742278e-08, 1, 4.371139e-08, 0, 3.821371e-15, -8.742278e-08, 1, 0, 0, 0)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
