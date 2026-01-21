@@ -1,43 +1,45 @@
 extends XROrigin3D
 
-# Ustawienia prędkości (zalecam małe wartości na start)
 @export var move_speed: float = 2.5
 @export var deadzone: float = 0.2
 
-# Referencje do dzieci XROrigin (upewnij się, że nazwy w drzewie są takie same!)
+# Upewnij się, że te nazwy pasują do drzewa sceny!
 @onready var xr_camera: XRCamera3D = $XRCamera3D
 @onready var left_controller: XRController3D = $LeftController 
 
+func _ready() -> void:
+	print("--- LOCOMOTION SCRIPT READY ---")
+	if left_controller:
+		print("Lewy kontroler znaleziony!")
+	else:
+		print("BŁĄD: Nie widzę LeftController!")
+
 func _physics_process(delta: float) -> void:
-	# 1. Pobieramy wychylenie lewej gałki
-	# "thumbstick" zwraca wektor Vector2 (x, y), gdzie y to przód/tył
+	if not left_controller:
+		return
+		
+	# Sprawdzamy surowe dane z gałki
 	var input_vector = left_controller.get_vector2("thumbstick")
 	
-	# Martwa strefa - jeśli drgania są zbyt małe, ignorujemy je
+	# DEBUG: Pokaż w konsoli, jeśli gałka cokolwiek nadaje
+	if input_vector.length() > 0.1:
+		print("Gałka nadaje: ", input_vector)
+	
 	if input_vector.length() < deadzone:
-		input_vector = Vector2.ZERO
-		return # Szkoda mocy obliczeniowej, przerywamy
+		return
 
-	# 2. Pobieramy kierunki, w które patrzy gracz
-	# basis.z to przód, basis.x to prawo
 	var forward_dir = -xr_camera.global_transform.basis.z
 	var right_dir = xr_camera.global_transform.basis.x
 	
-	# --- KLUCZOWE ZABEZPIECZENIE (z Twojej instrukcji 5.2) ---
-	# Spłaszczamy wektory, żeby ignorowały góra/dół. 
-	# Dzięki temu jak patrzysz w niebo i idziesz do przodu, nie wylecisz w powietrze.
+	# Spłaszczanie (blokada latania)
 	forward_dir.y = 0.0
 	right_dir.y = 0.0
-	
-	# Normalizujemy, żeby ruch po skosie nie był szybszy
 	forward_dir = forward_dir.normalized()
 	right_dir = right_dir.normalized()
 	
-	# 3. Obliczamy finalny wektor przesunięcia
-	# input_vector.y odpowiada za przód/tył (dlatego mnożymy z forward_dir)
-	# input_vector.x odpowiada za boki (dlatego mnożymy z right_dir)
 	var move_direction = (forward_dir * input_vector.y) + (right_dir * input_vector.x)
 	
-	# 4. Przesuwamy XROrigin
 	if move_direction.length() > 0:
+		# DEBUG: Pokaż, że próbujemy przesunąć gracza
+		# print("Przesuwam gracza!") 
 		global_translate(move_direction * move_speed * delta)
