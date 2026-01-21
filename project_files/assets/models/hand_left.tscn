@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://v0vdkyos0rfu"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gtj6i"]
+size = Vector3(0.1, 0.02, 0.09)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtj6i"]
+albedo_color = Color(0.5810941, 0.47588813, 0.3533029, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_smgm4"]
+size = Vector3(0.018, 0.018, 0.06)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_smgm4"]
+albedo_color = Color(0.5803922, 0.4745098, 0.3529412, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fhxly"]
+size = Vector3(0.02, 0.02, 0.06)
+
+[node name="HandLeft" type="Node3D"]
+
+[node name="Palm" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.045)
+mesh = SubResource("BoxMesh_gtj6i")
+surface_material_override/0 = SubResource("StandardMaterial3D_gtj6i")
+
+[node name="IndexFinger" type="MeshInstance3D" parent="Palm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.04, 0, -0.075)
+mesh = SubResource("BoxMesh_smgm4")
+surface_material_override/0 = SubResource("StandardMaterial3D_smgm4")
+
+[node name="MiddleFinger" type="MeshInstance3D" parent="Palm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.015, 0, -0.075)
+mesh = SubResource("BoxMesh_smgm4")
+surface_material_override/0 = SubResource("StandardMaterial3D_smgm4")
+
+[node name="RingFinger" type="MeshInstance3D" parent="Palm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.015, 0, -0.075)
+mesh = SubResource("BoxMesh_smgm4")
+surface_material_override/0 = SubResource("StandardMaterial3D_smgm4")
+
+[node name="Pinky" type="MeshInstance3D" parent="Palm"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.04, 0, -0.075)
+mesh = SubResource("BoxMesh_smgm4")
+surface_material_override/0 = SubResource("StandardMaterial3D_smgm4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.70710677, 0, -0.70710677, 0, 1, 0, 0.70710677, 0, 0.70710677, 0.06, 0, -0.02)
+mesh = SubResource("BoxMesh_fhxly")
+surface_material_override/0 = SubResource("StandardMaterial3D_smgm4")
