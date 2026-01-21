@@ -32,9 +32,19 @@ func _process(_delta: float) -> void:
 			ray.enabled = true # Włączamy fizykę lasera
 		
 		# Aktualizacja pozycji znacznika
+		# Aktualizacja pozycji znacznika
 		if ray.is_colliding():
 			marker.visible = true
-			marker.global_transform.origin = ray.get_collision_point()
+			var point = ray.get_collision_point()
+			
+			# Ustawiamy znacznik w punkcie trafienia
+			marker.global_transform.origin = point
+			
+			# --- NOWA LINIA: RESET ROTACJI ---
+			# Wymuszamy obrót (0,0,0) względem świata. 
+			# Dzięki temu znacznik zawsze leży płasko, niezależnie od tego jak machasz ręką.
+			marker.global_rotation = Vector3.ZERO 
+			
 		else:
 			marker.visible = false
 			
