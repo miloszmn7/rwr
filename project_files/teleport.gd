@@ -25,9 +25,9 @@ func _process(_delta: float) -> void:
 		marker.visible = false
 
 
-func _on_button_pressed(button_name: String) -> void:
-	if button_name == "trigger_click": # Reagujemy na spust
-		teleport_now()
+#func _on_button_pressed(button_name: String) -> void:
+#	if button_name == "trigger_click": # Reagujemy na spust
+#		teleport_now()
 
 func teleport_now() -> void:
 
